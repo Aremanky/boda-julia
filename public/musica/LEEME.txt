@@ -1,0 +1,2 @@
+Pon aquí la canción con el nombre cancion.mp3
+(si usas otro nombre, cámbialo en js/config.js).

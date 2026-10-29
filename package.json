@@ -1,0 +1,13 @@
+{
+  "name": "boda-julia-arturo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web de la boda de Julia y Arturo, con confirmación de asistencia",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
