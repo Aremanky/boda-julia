@@ -1,14 +1,16 @@
 Fotos de «La precuela de esta historia», en este orden:
 
-01.jpg  2018 · Nos vemos por primera vez
-02.jpg  2019 · Dublín
-03.jpg  2020 · Islantilla
-04.jpg  Covid
-05.jpg  2022 · Carcasona
-06.jpg  2023 · En casa (mudanza)
-07.jpg  2024 · Aniversario en el asador
-08.jpg  2025 · Oposición aprobada
-09.jpg  2026 · La pedida
-10.jpg  2027 · ¡Nos casamos!
+01.jpg  Santa Justa
+02.jpg  Dublín
+03.jpg  Islantilla
+04.jpg  Volando durante la pandemia
+05.jpg  Carcassonne
+06.jpg  Sabadell
+07.jpg  Asador Argentino
+08.jpg  Tribunal Supremo
+09.jpg  Girona, Temps de Flors
+10.jpg  París
+11.jpg  Sevilla
 
-Si cambiáis alguna, mejor cuadrada, de unos 1000 px y menos de 400 KB.
+Si cambiáis alguna: apaisada en proporción 4:3 (por ejemplo 1200 x 900 px), con los dos bien
+encuadrados y de menos de 400 KB. Los textos de cada foto están en index.html.

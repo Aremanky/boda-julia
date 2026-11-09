@@ -14,7 +14,7 @@ window.BODA_CONFIG = {
   // Canción: pon el archivo en la carpeta musica/ con este nombre.
   musica: "musica/cancion.mp3",
 
-  // Fotos de «La precuela»: carpeta fotos/, nombres 01.jpg … 10.jpg (cuadradas quedan mejor).
+  // Fotos de «La precuela»: carpeta fotos/, nombres 01.jpg … 11.jpg (apaisadas, 4:3).
   usarFotos: true,
 
   // No tocar si usas el servidor incluido (server.js).

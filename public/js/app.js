@@ -318,9 +318,6 @@
   }
 
   /* ───────── hero: hilo que se dibuja ───────── */
-  $$(".thread-divider path").forEach(function (p) {
-    try { p.style.setProperty("--len", Math.ceil(p.getTotalLength()) + 1); } catch (e) {}
-  });
 
   /* ───────── cuenta atrás ───────── */
   var target = new Date(CFG.fechaBoda).getTime();
@@ -357,7 +354,7 @@
 
   slides.forEach(function (fig, i) {
     var cols = (fig.getAttribute("data-c") || "").split(",");
-    var yr = fig.getAttribute("data-yr"), pl = fig.getAttribute("data-pl");
+    var pl = fig.getAttribute("data-pl");
     function placeholder() {
       fig.innerHTML = "";
       var ph = document.createElement("div");
@@ -365,14 +362,13 @@
       ph.style.setProperty("--c1", cols[0] || "#e9d6b8");
       ph.style.setProperty("--c2", cols[1] || "#d8e0cc");
       ph.style.setProperty("--c3", cols[2] || "#f1e6cf");
-      ph.innerHTML = '<span class="yr"></span><span class="pl"></span><span class="note">Aquí irá la foto</span>';
-      ph.querySelector(".yr").textContent = yr;
+      ph.innerHTML = '<span class="pl"></span><span class="note">Aquí irá la foto</span>';
       ph.querySelector(".pl").textContent = pl;
       fig.appendChild(ph);
     }
     if (CFG.usarFotos && fig.getAttribute("data-foto")) {
       var img = new Image();
-      img.alt = (caps[i] ? caps[i].querySelector(".tx").textContent : "") + " (" + yr + ")";
+      img.alt = (caps[i] ? caps[i].querySelector(".tx").textContent : "") + " (" + pl + ")";
       img.decoding = "async";
       if (i > 1) img.loading = "lazy";
       img.onerror = placeholder;
@@ -386,7 +382,7 @@
     var d = document.createElement("button");
     d.type = "button";
     d.className = "dot";
-    d.setAttribute("aria-label", "Ir a la diapositiva " + (i + 1) + " (" + yr + ")");
+    d.setAttribute("aria-label", "Ir a la foto " + (i + 1) + ": " + pl);
     d.addEventListener("click", function () { go(i, true); });
     dotsBox.appendChild(d);
   });

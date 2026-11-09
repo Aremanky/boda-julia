@@ -304,7 +304,7 @@ a { color: var(--russet); }
 .title-page .tp-small { font-family: var(--f-num); font-size: 6cqw; letter-spacing: .26em; text-transform: uppercase; color: var(--russet); padding-left: .26em; }
 .title-page .tp-names { font-family: var(--f-script); font-size: 15.5cqw; line-height: 1.12; color: var(--russet-deep); padding: 0 2cqw; }
 .title-page .tp-names .y { color: var(--gold); font-size: .78em; }
-.title-page .tp-heart { width: 42cqw; height: auto; }
+.title-page .tp-sep { width: 76cqw; }
 .title-page .tp-date { font-family: var(--f-num); font-size: 7.4cqw; letter-spacing: .06em; color: var(--ink); font-variant-numeric: lining-nums; }
 .title-page .tp-place { font-family: var(--f-num); font-size: 4.8cqw; letter-spacing: .34em; text-transform: uppercase; color: var(--ink-soft); padding-left: .34em; }
 
@@ -487,8 +487,17 @@ section, .hero, .site-foot { position: relative; }
 .hero-bfly.left { left: 0; bottom: 6%; --phi: -55.8deg; --ox: 83%; --oy: 63%; }
 .hero-bfly.right { right: 0; top: -4%; --phi: -127.3deg; --ox: 27%; --oy: 71%; }
 .hero-bfly.right .flap { animation-delay: -2.2s; }
-.thread-divider { width: min(300px, 80%); height: auto; margin: .6rem auto 1.1rem; display: block; overflow: visible; }
-.thread-divider path { fill: none; stroke: var(--thread); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: .85; }
+/* heart divider (the couple's own drawing): used above every chapter, under the names and in the book */
+.sep {
+  display: block;
+  width: min(300px, 82%);
+  max-width: 100%;
+  aspect-ratio: 1476 / 192;
+  background: url("../img/separador.webp") center / contain no-repeat;
+}
+.sep-hero { width: min(380px, 94%); margin: .7rem auto 1.1rem; }
+body.is-revealing .sep-hero { animation: unroll 1.5s .7s cubic-bezier(.3, .7, .2, 1) both; }
+@keyframes unroll { from { clip-path: inset(0 45% 0 45%); opacity: 0; } 20% { opacity: 1; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 .subtitle {
   margin: 0;
   font-style: italic;
@@ -542,10 +551,7 @@ section, .hero, .site-foot { position: relative; }
 .countdown-done { margin: 1.2rem 0 0; font-family: var(--f-script); font-size: 2.2rem; color: var(--russet); }
 
 /* chapter headings */
-.ch-head { display: grid; justify-items: center; text-align: center; gap: .5rem; margin-bottom: clamp(26px, 5vw, 40px); }
-.ch-orn { width: 112px; height: auto; color: var(--gold); overflow: visible; }
-.ch-orn .t { fill: none; stroke: var(--thread); stroke-width: 1.6; stroke-linecap: round; stroke-opacity: .85; }
-.ch-orn .g { fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; }
+.ch-head { display: grid; justify-items: center; text-align: center; gap: .7rem; margin-bottom: clamp(26px, 5vw, 40px); }
 .ch-title {
   margin: 0;
   font-family: var(--f-text);
@@ -700,14 +706,14 @@ section, .hero, .site-foot { position: relative; }
 .story { display: grid; justify-items: center; }
 .slides {
   position: relative;
-  width: min(100%, 460px);
+  width: min(100%, 560px);
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
 }
 .frame {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   max-width: 100%;
   padding: 12px;
   background: #fffdf7;
@@ -732,11 +738,11 @@ section, .hero, .site-foot { position: relative; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 35%;
+  object-position: 50% 50%;
   display: block;
 }
 .slide.is-on img { animation: kenburns 7s ease-out both; }
-@keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes kenburns { from { transform: scale(1.05); } to { transform: scale(1); } }
 .ph { /* watercolour placeholder until the real photo arrives */
   position: absolute;
   inset: 0;
@@ -752,14 +758,13 @@ section, .hero, .site-foot { position: relative; }
     radial-gradient(80% 70% at 50% 50%, var(--c3), transparent 80%),
     #f3ead6;
 }
-.ph .yr { font-family: var(--f-num); font-size: 3.4rem; line-height: 1; color: rgba(29, 34, 52, 0.78); }
 .ph .pl { font-family: var(--f-script); font-size: 2rem; line-height: 1.2; color: var(--russet-deep); }
 .ph .note { font-size: .9rem; font-style: italic; color: rgba(29, 34, 52, 0.55); margin-top: .4rem; }
 .caption {
   position: relative;
-  min-height: 8.6em;
-  width: min(100%, 520px);
-  margin-top: 26px;
+  min-height: 7.4em;
+  width: min(100%, 560px);
+  margin-top: 24px;
   text-align: center;
 }
 .cap {
@@ -767,15 +772,14 @@ section, .hero, .site-foot { position: relative; }
   inset: 0 0 auto;
   display: grid;
   justify-items: center;
-  gap: .25rem;
+  gap: .4rem;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity .8s ease, transform .8s ease;
 }
 .cap.is-on { opacity: 1; transform: none; position: relative; }
-.cap .yr { font-family: var(--f-num); font-size: 1.75rem; letter-spacing: .04em; line-height: 1; color: var(--russet); }
-.cap .tx { font-size: 1.28rem; line-height: 1.4; text-wrap: balance; max-width: 30ch; }
-.cap .pl { font-size: .86rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); padding-left: .22em; }
+.cap .pl { font-family: var(--f-num); font-size: .9rem; line-height: 1.35; letter-spacing: .15em; text-transform: uppercase; color: var(--gold-deep); padding-left: .15em; text-wrap: balance; }
+.cap .tx { font-size: 1.3rem; line-height: 1.4; text-wrap: balance; max-width: 30ch; }
 .story-ctrl { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; }
 .dots { display: flex; gap: 2px; flex-wrap: nowrap; justify-content: center; }
 .dot {
@@ -803,7 +807,7 @@ section, .hero, .site-foot { position: relative; }
   color: var(--russet);
 }
 .arrow svg { width: 18px; height: 18px; }
-.progress { width: min(100%, 460px); height: 2px; background: rgba(122, 52, 18, 0.12); margin-top: 18px; overflow: hidden; }
+.progress { width: min(100%, 560px); height: 2px; background: rgba(122, 52, 18, 0.12); margin-top: 18px; overflow: hidden; }
 .progress span { display: block; height: 100%; width: 100%; background: var(--thread); transform-origin: left; transform: scaleX(0); }
 
 /* dress code */
@@ -1017,8 +1021,6 @@ body.is-revealing .hero .rv:nth-child(4) { animation-delay: .65s; }
 body.is-revealing .hero .rv:nth-child(5) { animation-delay: .85s; }
 body.is-revealing .hero .rv:nth-child(6) { animation-delay: 1.05s; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-body.is-revealing .thread-divider path { stroke-dasharray: var(--len, 600); stroke-dashoffset: var(--len, 600); animation: draw 1.6s .9s ease forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
