@@ -77,14 +77,25 @@ function serveStatic(req, res, urlPath) {
     if (err || !st.isFile()) return send(res, 404, "No encontrado", { "Content-Type": "text/plain; charset=utf-8" });
     const ext = path.extname(file).toLowerCase();
     const type = MIME[ext] || "application/octet-stream";
-    const longCache = /\.(webp|jpe?g|png|gif|avif|mp3|m4a|aac|ogg|woff2?|svg|ico)$/i.test(ext);
+    // Always revalidate (browsers and Cloudflare): when a photo or the song is replaced with the same
+    // name, everyone gets the new one straight away. Unchanged files answer 304 with no body.
+    const etag = `W/"${st.size.toString(16)}-${Math.floor(st.mtimeMs).toString(16)}"`;
     const headers = {
       "Content-Type": type,
-      "Cache-Control": longCache ? "public, max-age=604800" : "no-cache",
+      "Cache-Control": "no-cache",
+      "ETag": etag,
       "Accept-Ranges": "bytes",
       "Last-Modified": st.mtime.toUTCString(),
     };
     const range = req.headers.range;
+    const inm = req.headers["if-none-match"];
+    const ims = req.headers["if-modified-since"];
+    const fresh = inm ? inm.split(/\s*,\s*/).includes(etag)
+      : (ims ? Date.parse(ims) >= Math.floor(st.mtimeMs / 1000) * 1000 : false);
+    if (fresh && !range) {
+      res.writeHead(304, { ...SECURITY_HEADERS, "Cache-Control": "no-cache", "ETag": etag, "Last-Modified": headers["Last-Modified"] });
+      return res.end();
+    }
     if (range) {
       const m = /^bytes=(\d*)-(\d*)$/.exec(range);
       if (!m) return send(res, 416, "", { "Content-Range": `bytes */${st.size}` });

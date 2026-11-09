@@ -87,7 +87,7 @@ y crea el registro DNS: `cloudflared tunnel route dns <nombre-del-túnel> boda.t
 
 Las fotos de «La precuela» ya van incluidas. Si queréis cambiar alguna, sustituid el archivo en `public/fotos/` con el mismo nombre (el orden está en `fotos/LEEME.txt`). Se ven enteras, verticales o apaisadas, sin recortar nada. Los textos de cada foto están en `public/index.html`, en la sección «La precuela».
 
-Después de cambiar ficheros no hace falta reiniciar el servidor: basta con recargar la página.
+Después de cambiar fotos, textos o la canción no hace falta reiniciar el servidor: basta con recargar la página (el servidor obliga al navegador y a Cloudflare a comprobar siempre si hay una versión nueva). Solo si se actualiza `server.js` hay que reiniciar el servicio: `sudo systemctl restart boda`.
 
 ## Copia de seguridad
 
