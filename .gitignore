@@ -147,3 +147,6 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Confirmaciones de los invitados (datos personales): nunca al repositorio
+data/

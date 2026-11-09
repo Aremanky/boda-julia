@@ -9,7 +9,7 @@ boda/
 │   ├── index.html       textos de la página
 │   ├── js/config.js     ← ajustes: número de cuenta, canción, fotos
 │   ├── musica/          ← aquí va cancion.mp3
-│   ├── fotos/           las 10 fotos de «La precuela» (01.jpg … 10.jpg)
+│   ├── fotos/           las 11 fotos de «La precuela» (01.jpg … 11.jpg)
 │   ├── img/             ilustración, mariposas, icono e imagen para compartir
 │   └── fonts/           tipografía de los números
 └── data/                se crea solo; aquí se guardan las respuestas
@@ -85,7 +85,7 @@ y crea el registro DNS: `cloudflared tunnel route dns <nombre-del-túnel> boda.t
 | Puntos exactos del autobús | `public/index.html`, busca «EDITAR: cuando tengáis cerrados los puntos exactos del autobús» |
 | Imagen al compartir por WhatsApp | en `public/index.html` cambia `og:image` por la dirección completa, p. ej. `https://boda.tudominio.com/img/compartir.jpg` |
 
-Las fotos de «La precuela» ya van incluidas. Si queréis cambiar alguna, sustituid el archivo en `public/fotos/` con el mismo nombre (el orden está en `fotos/LEEME.txt`; mejor cuadradas).
+Las fotos de «La precuela» ya van incluidas. Si queréis cambiar alguna, sustituid el archivo en `public/fotos/` con el mismo nombre (el orden está en `fotos/LEEME.txt`). Se ven enteras, verticales o apaisadas, sin recortar nada. Los textos de cada foto están en `public/index.html`, en la sección «La precuela».
 
 Después de cambiar ficheros no hace falta reiniciar el servidor: basta con recargar la página.
 

@@ -367,13 +367,24 @@
       fig.appendChild(ph);
     }
     if (CFG.usarFotos && fig.getAttribute("data-foto")) {
+      // each photo keeps its own shape (upright or wide), so nothing of them is cropped
+      var shape = function (r) {
+        img.style.aspectRatio = String(r);
+        fig.classList.toggle("h", r >= 1);
+        fig.classList.toggle("v", r < 1);
+      };
       var img = new Image();
+      var print = document.createElement("div");
+      print.className = "print";
       img.alt = (caps[i] ? caps[i].querySelector(".tx").textContent : "") + " (" + pl + ")";
       img.decoding = "async";
       if (i > 1) img.loading = "lazy";
+      shape(parseFloat(fig.getAttribute("data-ar")) || 4 / 3);
+      img.onload = function () { if (img.naturalWidth && img.naturalHeight) shape(img.naturalWidth / img.naturalHeight); };
       img.onerror = placeholder;
       img.src = fig.getAttribute("data-foto");
-      fig.appendChild(img);
+      print.appendChild(img);
+      fig.appendChild(print);
     } else {
       placeholder();
     }

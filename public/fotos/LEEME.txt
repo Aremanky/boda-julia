@@ -12,5 +12,5 @@ Fotos de «La precuela de esta historia», en este orden:
 10.jpg  París
 11.jpg  Sevilla
 
-Si cambiáis alguna: apaisada en proporción 4:3 (por ejemplo 1200 x 900 px), con los dos bien
-encuadrados y de menos de 400 KB. Los textos de cada foto están en index.html.
+Si cambiáis alguna, ponedla con el mismo nombre: se ve entera, vertical o apaisada, sin recortes.
+Mejor de unos 1200 px por el lado largo y menos de 400 KB. Los textos de cada foto están en index.html.

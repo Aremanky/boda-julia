@@ -706,43 +706,52 @@ body.is-revealing .sep-hero { animation: unroll 1.5s .7s cubic-bezier(.3, .7, .2
 .story { display: grid; justify-items: center; }
 .slides {
   position: relative;
-  width: min(100%, 560px);
+  width: min(100%, 500px);
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
 }
-.frame {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  max-width: 100%;
-  padding: 12px;
-  background: #fffdf7;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 22px 44px -26px rgba(60, 30, 10, 0.55);
-  rotate: -.6deg;
-}
-.frame-in { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--paper-deep); }
-.corner { position: absolute; width: 34px; height: 34px; z-index: 3; color: var(--gold); pointer-events: none; }
-.corner.tl { left: 2px; top: 2px; }
-.corner.tr { right: 2px; top: 2px; transform: scaleX(-1); }
-.corner.bl { left: 2px; bottom: 2px; transform: scaleY(-1); }
-.corner.br { right: 2px; bottom: 2px; transform: scale(-1, -1); }
+/* A square stage. Each photo sits on it as a mounted print in its own shape (upright or wide),
+   as large as the stage allows, so nothing of the two of them is ever cropped. */
+.frame { position: relative; aspect-ratio: 1 / 1; max-width: 100%; }
+.frame-in { position: absolute; inset: 0; }
 .slide {
   position: absolute;
   inset: 0;
   margin: 0;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr); /* one cell exactly the size of the stage */
+  place-items: center;
   opacity: 0;
   transition: opacity 1.1s ease;
 }
 .slide.is-on { opacity: 1; z-index: 1; }
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  display: block;
+.print {
+  position: relative;
+  padding: 10px;
+  background: #fffdf7;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 20px 40px -24px rgba(60, 30, 10, 0.55);
+  rotate: -.6deg;
 }
-.slide.is-on img { animation: kenburns 7s ease-out both; }
-@keyframes kenburns { from { transform: scale(1.05); } to { transform: scale(1); } }
+.slide:nth-child(even) .print { rotate: .5deg; }
+.slide.h .print { width: 100%; }
+.slide.v .print { height: 100%; }
+.print img { display: block; object-fit: contain; background: var(--paper-deep); }
+.slide.h .print img { width: 100%; height: auto; }
+.slide.v .print img { height: 100%; width: auto; }
+.print::after { /* gold photo corners */
+  content: "";
+  position: absolute;
+  inset: 3px;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cg transform=''%3E%3Cpath d='M0 0H34L0 34Z' fill='%23b0832f' fill-opacity='.92'/%3E%3Cpath d='M5 5.5C10 5.5 14 7 17 10M5.5 5C5.5 10 7 14 10 17' fill='none' stroke='%23fff4d6' stroke-opacity='.55' stroke-width='.9' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E") left top / 28px 28px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cg transform='matrix(-1 0 0 1 34 0)'%3E%3Cpath d='M0 0H34L0 34Z' fill='%23b0832f' fill-opacity='.92'/%3E%3Cpath d='M5 5.5C10 5.5 14 7 17 10M5.5 5C5.5 10 7 14 10 17' fill='none' stroke='%23fff4d6' stroke-opacity='.55' stroke-width='.9' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E") right top / 28px 28px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cg transform='matrix(1 0 0 -1 0 34)'%3E%3Cpath d='M0 0H34L0 34Z' fill='%23b0832f' fill-opacity='.92'/%3E%3Cpath d='M5 5.5C10 5.5 14 7 17 10M5.5 5C5.5 10 7 14 10 17' fill='none' stroke='%23fff4d6' stroke-opacity='.55' stroke-width='.9' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E") left bottom / 28px 28px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cg transform='matrix(-1 0 0 -1 34 34)'%3E%3Cpath d='M0 0H34L0 34Z' fill='%23b0832f' fill-opacity='.92'/%3E%3Cpath d='M5 5.5C10 5.5 14 7 17 10M5.5 5C5.5 10 7 14 10 17' fill='none' stroke='%23fff4d6' stroke-opacity='.55' stroke-width='.9' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E") right bottom / 28px 28px no-repeat;
+}
+.slide.is-on .print { animation: settle .9s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes settle { from { transform: translateY(8px); } to { transform: none; } }
 .ph { /* watercolour placeholder until the real photo arrives */
   position: absolute;
   inset: 0;
@@ -764,7 +773,7 @@ body.is-revealing .sep-hero { animation: unroll 1.5s .7s cubic-bezier(.3, .7, .2
   position: relative;
   min-height: 7.4em;
   width: min(100%, 560px);
-  margin-top: 24px;
+  margin-top: 20px;
   text-align: center;
 }
 .cap {
@@ -807,7 +816,7 @@ body.is-revealing .sep-hero { animation: unroll 1.5s .7s cubic-bezier(.3, .7, .2
   color: var(--russet);
 }
 .arrow svg { width: 18px; height: 18px; }
-.progress { width: min(100%, 560px); height: 2px; background: rgba(122, 52, 18, 0.12); margin-top: 18px; overflow: hidden; }
+.progress { width: min(100%, 500px); height: 2px; background: rgba(122, 52, 18, 0.12); margin-top: 18px; overflow: hidden; }
 .progress span { display: block; height: 100%; width: 100%; background: var(--thread); transform-origin: left; transform: scaleX(0); }
 
 /* dress code */
@@ -1024,5 +1033,5 @@ body.is-revealing .hero .rv:nth-child(6) { animation-delay: 1.05s; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  .slide.is-on img { animation: none; }
+  .slide.is-on .print { animation: none; }
 }
